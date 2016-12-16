@@ -1,5 +1,6 @@
 var childproc = require('child_process'),
-    EventEmitter = require('events').EventEmitter;
+    EventEmitter = require('events').EventEmitter,
+    path = require('path');
 
 
 function exec2(file, args /*, options, callback */) {
@@ -21,7 +22,7 @@ function exec2(file, args /*, options, callback */) {
     }
   }
 
-  var child = childproc.spawn(file, args);
+  var child = childproc.spawn(path.join(__dirname,'common/im',file), args);
   var killed = false;
   var timedOut = false;
 
@@ -280,7 +281,7 @@ exports.crop = function (options, callback) {
     throw new TypeError("No srcPath or data defined");
   if (!options.height && !options.width)
     throw new TypeError("No width or height defined");
-  
+
   if (options.srcPath){
     var args = options.srcPath;
   } else {
