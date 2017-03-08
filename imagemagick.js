@@ -22,7 +22,13 @@ function exec2(file, args /*, options, callback */) {
     }
   }
 
-  var child = childproc.spawn(path.join(__dirname,'common/im',file), args);
+  var _execFilePath =file;
+  if(process.platform=='win32' || process.platform=='win64'){
+    _execFilePath =path.join(__dirname,'common/im',file),;
+  }
+
+
+  var child = childproc.spawn(_execFilePath, args);
   var killed = false;
   var timedOut = false;
 
