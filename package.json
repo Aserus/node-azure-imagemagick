@@ -1,6 +1,6 @@
 { "name"        : "azure-imagemagick"
 , "description" : "A wrapper around the imagemagick cli (parent - imagemagick)"
-, "version"     : "0.3.0"
+, "version"     : "0.3.1"
 , "author"      : "Warus <http://firebyte.ru>"
 , "licenses"    : ["MIT"]
 , "repository"  : { "type" : "git"

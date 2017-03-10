@@ -24,7 +24,7 @@ function exec2(file, args /*, options, callback */) {
 
   var _execFilePath =file;
   if(process.platform=='win32' || process.platform=='win64'){
-    _execFilePath =path.join(__dirname,'common/im',file),;
+    _execFilePath =path.join(__dirname,'common/im',file);
   }
 
 
