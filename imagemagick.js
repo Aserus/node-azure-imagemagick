@@ -24,7 +24,11 @@ function exec2(file, args /*, options, callback */) {
 
   var _execFilePath =file;
   if(process.platform=='win32' || process.platform=='win64'){
-    _execFilePath =path.join(__dirname,'common/im',file);
+    if(process.arch=='x64'){
+      _execFilePath =path.join(__dirname,'common/im64',file);
+    }else{
+      _execFilePath =path.join(__dirname,'common/im32',file);
+    }
   }
 
 
@@ -138,6 +142,9 @@ function parseIdentify(input) {
   return prop;
 };
 
+
+exports.reduced_load = false;
+
 exports.identify = function(pathOrArgs, callback) {
   var isCustom = Array.isArray(pathOrArgs),
       isData,
@@ -153,7 +160,7 @@ exports.identify = function(pathOrArgs, callback) {
     args[args.length-1] = '-';
     callback = pathOrArgs;
   }
-  var proc = exec2(exports.identify.path, args, {timeout:120000}, function(err, stdout, stderr) {
+  var proc = exec2(exports.identify.path, args, {timeout:120000,reduced_load:exports.reduced_load}, function(err, stdout, stderr) {
     var result, geometry;
     if (!err) {
       if (isCustom) {
@@ -257,6 +264,8 @@ exports.convert = function(args, timeout, callback) {
   }
   if (timeout && (timeout = parseInt(timeout)) > 0 && !isNaN(timeout))
     procopt.timeout = timeout;
+
+  procopt.reduced_load = exports.reduced_load;
   return exec2(exports.convert.path, args, procopt, callback);
 }
 exports.convert.path = 'convert';
