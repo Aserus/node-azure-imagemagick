@@ -9,7 +9,7 @@ You can install this module using [npm](http://github.com/isaacs/npm):
 ## Example
 
 ```javascript
-var im = require('imagemagick');
+var im = require('azure-imagemagick');
 im.readMetadata('kittens.jpg', function(err, metadata){
   if (err) throw err;
   console.log('Shot at '+metadata.exif.dateTimeOriginal);
